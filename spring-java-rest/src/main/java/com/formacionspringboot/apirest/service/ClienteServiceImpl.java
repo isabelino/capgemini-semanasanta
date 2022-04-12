@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.formacionspringboot.apirest.dao.ClienteDao;
 import com.formacionspringboot.apirest.entity.Cliente;
+import com.formacionspringboot.apirest.entity.Region;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -41,6 +42,21 @@ public class ClienteServiceImpl implements ClienteService {
 	@Transactional
 	public void borrar(long id) {
 		repositorio.deleteById(id);
+	}
+
+
+	@Override
+	@Transactional( readOnly = true)
+	public List<Region> buscarTodasLasRegiones() {
+		return repositorio.buscarTodasLasRegiones();
+	}
+
+
+	@Override
+	@Transactional( readOnly = true)
+	public List<Cliente> buscarPorApellido(String apellido ) {
+		
+		return repositorio.findAllByApellido(apellido);
 	}
 
 }
